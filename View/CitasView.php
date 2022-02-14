@@ -42,9 +42,11 @@ class CitasView{
             <label>Paciente</label>
             <select name='paciente'>");
         foreach($data['pacientes'] as $p){
-            print(
-                '<option value="'.$p['id'].'">'.$p['nombre'].' '.$p['apellidos'].'</option>'
-            );
+            if ($p['alta']){
+                print(
+                    '<option value="'.$p['id'].'">'.$p['nombre'].' '.$p['apellidos'].'</option>'
+                );
+            }
         }
         print(
             "</select>
@@ -52,9 +54,11 @@ class CitasView{
             <label>Doctor</label>
             <select name='doctor'>");
             foreach($data['doctores'] as $d){
-                print(
-                    '<option value="'.$d['id'].'">'.$d['nombre'].' '.$d['apellidos'].', '.$d['especialidad'].'</option>'
-                );
+                if ($d['alta']){
+                    print(
+                        '<option value="'.$d['id'].'">'.$d['nombre'].' '.$d['apellidos'].', '.$d['especialidad'].'</option>'
+                    );
+                }
             }
         print(
         "</select><br>
@@ -76,9 +80,11 @@ class CitasView{
             <label>Doctor</label>
             <select name='doctor'>");
             foreach($data['doctores'] as $d){
-                print(
-                    '<option value="'.$d['id'].'">'.$d['nombre'].' '.$d['apellidos'].', '.$d['especialidad'].'</option>'
-                );
+                if ($d['alta']){
+                    print(
+                        '<option value="'.$d['id'].'">'.$d['nombre'].' '.$d['apellidos'].', '.$d['especialidad'].'</option>'
+                    );
+                }
             }
         print(
         "</select><br>

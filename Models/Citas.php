@@ -25,8 +25,8 @@ class Citas extends Database{
     }
 
     function Consuldet(){
-        $sqlP = 'select nombre, apellidos, id from pacientes where alta = 0';
-        $sqlD = 'select nombre, apellidos, id, especialidad from doctores where alta=0';
+        $sqlP = 'select nombre, apellidos, id, alta from pacientes';
+        $sqlD = 'select nombre, apellidos, id, especialidad, alta from doctores';
         $resul = [];
         $resul['pacientes'] = $this->conexion->query($sqlP);
         $resul['doctores'] = $this->conexion->query($sqlD);
