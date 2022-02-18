@@ -85,7 +85,6 @@ class DoctorController extends BaseController{
         }
         $id = filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
         if(count($data) < 5){
-            var_dump($data);
             $this->view->displayError('Actualizando doctor');
         }else{
             $this->model->updateDoctor($data,$id);

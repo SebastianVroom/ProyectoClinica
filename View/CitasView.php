@@ -1,6 +1,8 @@
 <?php
 namespace View;
 
+use Symfony\Component\Validator\Constraints\Date;
+
 class CitasView{
     function __construct()
     {
@@ -17,7 +19,9 @@ class CitasView{
     function mostrCitas($citas){
         echo '<table><tr><td>Fecha</td><td>Hora</td><td>Doctor</td><td>Especialidad</td><td>Acciones</td></tr>';
         foreach($citas as $c){
-            echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php/Controller\CitasController/delete&id=".$c['id']."'>Borrar</a></td></tr>";
+            if($c['fecha'] >= date('Y-m-d')){
+                echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='".BASE_URL."Citas/deleteAdm&id=".$c['id']."'>Borrar</a></td></tr>";
+            }
         }
         echo '</table>';
     }
@@ -25,7 +29,11 @@ class CitasView{
     function mostrAdmCitas($citas){
         echo '<table><tr><td>Paciente</td><td>Fecha</td><td>Hora</td><td>Doctor</td><td>Especialidad</td><td>Acciones</td></tr>';
         foreach($citas as $c){
-            echo "<tr><td>".$c['Pnombre'].' '.$c['Papellidos']."</td><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php/Controller\CitasController/deleteAdm&id=".$c['id']."'>Borrar</a></td></tr>";
+            echo "<tr><td>".$c['Pnombre'].' '.$c['Papellidos']."</td><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td>";
+            if ($c['fecha'] >= date('Y-m-d')){
+                echo "<td><a href='".BASE_URL."Citas/deleteAdm&id=".$c['id']."'>Borrar</a></td>";
+            }
+            echo "</tr>";
         }
         echo '</table>';
     }
@@ -38,7 +46,7 @@ class CitasView{
             <label>Hora</label>
             <input type='time' name='tiempo'><br>
             <label>Fecha</label>
-            <input type='date' name='fecha'><br>
+            <input type='date' min='".date('Y-m-d')."' name='fecha'><br>
             <label>Paciente</label>
             <select name='paciente'>");
         foreach($data['pacientes'] as $p){
@@ -76,7 +84,7 @@ class CitasView{
             <label>Hora</label>
             <input type='time' name='tiempo'><br>
             <label>Fecha</label>
-            <input type='date' name='fecha'><br>
+            <input type='date' min='".date('Y-m-d')."' name='fecha'><br>
             <label>Doctor</label>
             <select name='doctor'>");
             foreach($data['doctores'] as $d){

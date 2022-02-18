@@ -31,24 +31,4 @@ class Database {
       exit;
     }
   }
-  
-   public function consulta(string $consultaSQL): void {
-       $this->resultado = $this->conexion->query($consultaSQL);
-  }
-  public function extraer_registro(): mixed {
-    return ( $fila = $this->resultado->fetch(PDO::FETCH_ASSOC ))? $fila:false;
-    
-  }
-
-  public function extraer_todos(): array {
-    return $this->resultado->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  public function filasAfectadas(): int{
-    return $this->resultado->rowCount();
-  }
-
-  public function ultimoIdInsertado(): int{
-    return $this->conexion->lastInsertId;
-  }
 }
