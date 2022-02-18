@@ -45,7 +45,7 @@ class LoginController{
         if (isset($_SESSION['userdata']) || isset($_SESSION['usertype'])){
             unset($_SESSION['userdata']);
             unset($_SESSION['usertype']);
-            header('Location:index.php');
+            header('Location:'.BASE_URL);
         }else{
             $this->view->displayError('Error al salir de sesion');
         }

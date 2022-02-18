@@ -1,18 +1,22 @@
+<?php 
+require_once "autoloader.php";
+require_once "View/header.php";
+require_once "Lib/PageConfig.php";
+
+$style = BASE_URL.'index.css'?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <title>Clinica
         </title>
         <meta charset="UTF-8" http-equiv="content-type" content="text/html">
-        <link rel="stylesheet" media="screen" type="text/css" href="index.css" >
+        <link rel="stylesheet" media="screen" type="text/css" href=<?=$style?>>
         <script src=""></script>
     </head>
     <body>
 <?php
 
 session_start();
-require_once "autoloader.php";
-require_once "View/header.php";
 
 if (isset($_SESSION['usertype'])){
     if ($_SESSION['usertype'] == 'paciente'){
@@ -25,7 +29,7 @@ if (isset($_SESSION['usertype'])){
 }
 
 if(isset($_GET['controllador']) && !empty($_GET['controllador']) && isset($_GET['accion']) && !empty($_GET['accion'])){
-    $cont = $_GET['controllador'];
+    $cont = 'Controller\\'.$_GET['controllador'].'Controller';
     $act = $_GET['accion'];
     if (class_exists($cont)){
         $cont = new $cont;

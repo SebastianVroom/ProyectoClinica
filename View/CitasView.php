@@ -17,7 +17,7 @@ class CitasView{
     function mostrCitas($citas){
         echo '<table><tr><td>Fecha</td><td>Hora</td><td>Doctor</td><td>Especialidad</td><td>Acciones</td></tr>';
         foreach($citas as $c){
-            echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php?controllador=Controller\CitasController&accion=delete&id=".$c['id']."'>Borrar</a></td></tr>";
+            echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php/Controller\CitasController/delete&id=".$c['id']."'>Borrar</a></td></tr>";
         }
         echo '</table>';
     }
@@ -25,7 +25,7 @@ class CitasView{
     function mostrAdmCitas($citas){
         echo '<table><tr><td>Paciente</td><td>Fecha</td><td>Hora</td><td>Doctor</td><td>Especialidad</td><td>Acciones</td></tr>';
         foreach($citas as $c){
-            echo "<tr><td>".$c['Pnombre'].' '.$c['Papellidos']."</td><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php?controllador=Controller\CitasController&accion=deleteAdm&id=".$c['id']."'>Borrar</a></td></tr>";
+            echo "<tr><td>".$c['Pnombre'].' '.$c['Papellidos']."</td><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='index.php/Controller\CitasController/deleteAdm&id=".$c['id']."'>Borrar</a></td></tr>";
         }
         echo '</table>';
     }
@@ -34,7 +34,7 @@ class CitasView{
         print(
             "<fieldset>
             <legend>Registro paciente</legend>
-            <form method='post' action='index.php?controllador=Controller\CitasController&accion=crearAdmCita'>
+            <form method='post' action='".BASE_URL."Citas/crearAdmCita'>
             <label>Hora</label>
             <input type='time' name='tiempo'><br>
             <label>Fecha</label>
@@ -72,7 +72,7 @@ class CitasView{
         print(
             "<fieldset>
             <legend>Registro paciente</legend>
-            <form method='post' action='index.php?controllador=Controller\CitasController&accion=crearCita'>
+            <form method='post' action='".BASE_URL."Citas/crearCita'>
             <label>Hora</label>
             <input type='time' name='tiempo'><br>
             <label>Fecha</label>
@@ -92,6 +92,10 @@ class CitasView{
         </form>
         </fieldset>"
         );
+    }
+
+    function modAdmForm($cita,$data){
+
     }
 };
 ?>

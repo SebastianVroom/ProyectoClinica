@@ -27,7 +27,7 @@ class DoctorView{
     function mostrAdmDoctores($doctores){
         echo '<table><tr><td>Doctor</td><td>Especialidad</td><td>TLF</td><td>de Alta</td><td>Acciones</td></tr>';
         foreach($doctores as $d){
-            echo "<tr><td>".$d['nombre'].' '.$d['apellidos']."</td><td>".$d['especialidad']."</td><td>".$d['telefono']."</td><td>".$d['alta']."</td><td><a href='index.php?controllador=Controller\DoctorController&accion=deleteAdm&id=".$d['id']."'>Borrar</a> <a href='index.php?controllador=Controller\DoctorController&accion=modAdmDoctor&id=".$d['id']."'>Modificar</a></td></tr>";
+            echo "<tr><td>".$d['nombre'].' '.$d['apellidos']."</td><td>".$d['especialidad']."</td><td>".$d['telefono']."</td><td>".$d['alta']."</td><td><a href='index.php/Controller\DoctorController/=deleteAdm&id=".$d['id']."'>Borrar</a> <a href='index.php/Controller\DoctorController/=modAdmDoctor&id=".$d['id']."'>Modificar</a></td></tr>";
         }
         echo '</table>';
     }
@@ -36,7 +36,7 @@ class DoctorView{
         print(
             "<fieldset>
                 <legend>Registro Doctores</legend>
-                <form method='POST' action='index.php?controllador=Controller\DoctorController&accion=registro' >
+                <form method='POST' action='".BASE_URL."Doctor/registro' >
                 <label>Nombre</label>
                 <input name='nombre'><br>
                 <label>Apellidos</label>
@@ -55,7 +55,7 @@ class DoctorView{
         print(
             "<fieldset>
                 <legend>Modifcacion Doctores</legend>
-                <form method='POST' action='index.php?controllador=Controller\DoctorController&accion=update' >
+                <form method='POST' action='".BASE_URL."Doctor/update' >
                 <label>Nombre</label>
                 <input name='nombre' value=".$data['nombre']."><br>
                 <label>Apellidos</label>

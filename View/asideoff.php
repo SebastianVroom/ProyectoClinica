@@ -1,7 +1,7 @@
 <div>
     <fieldset>
         <legend>Login</legend>
-    <form method="post" action="index.php?controllador=Controller\LoginController&accion=login">
+    <form method="post" action="<?=BASE_URL?>Login/login">
         <label>email</label>
         <input type='email' name='mail'><br>
         <label>contraseña</label>

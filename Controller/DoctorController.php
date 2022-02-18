@@ -80,12 +80,13 @@ class DoctorController extends BaseController{
         if(isset($_POST['tlf']) && !empty($_POST['tlf']) && filter_var($_POST['tlf'], FILTER_VALIDATE_INT)){
             $data[':tlf'] = filter_var($_POST['tlf'],FILTER_SANITIZE_NUMBER_INT);
         }
-        if(isset($_POST['alta']) && !empty($_POST['alta']) && filter_var($_POST['alta'], FILTER_VALIDATE_INT)){
+        if(isset($_POST['alta']) && (filter_var($_POST['alta'], FILTER_VALIDATE_INT) === 0 || filter_var($_POST['alta'], FILTER_VALIDATE_INT))){
             $data[':alta'] = filter_var($_POST['alta'],FILTER_SANITIZE_NUMBER_INT);
         }
         $id = filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
-        if(count($data) < 4){
-            $this->view->displayError('Actualizando doctor doctor');
+        if(count($data) < 5){
+            var_dump($data);
+            $this->view->displayError('Actualizando doctor');
         }else{
             $this->model->updateDoctor($data,$id);
             $this->mostrarAdmDoctor();

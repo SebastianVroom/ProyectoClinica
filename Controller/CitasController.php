@@ -85,5 +85,15 @@ class CitasController extends BaseController{
             $this->mostrarCitas();
         }
     }
+
+    function modAdmCita(){
+        $this->chckRol('administrador');
+        $consul = $this->model->consulCitas($_GET['id']);
+        foreach($consul as $c){
+            $resul = $c;
+        }
+        $data = $this->model->Consuldet();
+        $this->view->modAdmForm($resul,$data);
+    }
 }
 ?>
