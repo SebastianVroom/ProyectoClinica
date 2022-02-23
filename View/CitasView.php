@@ -19,9 +19,13 @@ class CitasView{
     function mostrCitas($citas){
         echo '<table><tr><td>Fecha</td><td>Hora</td><td>Doctor</td><td>Especialidad</td><td>Acciones</td></tr>';
         foreach($citas as $c){
-            if($c['fecha'] >= date('Y-m-d')){
-                echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td><td><a href='".BASE_URL."Citas/deleteAdm&id=".$c['id']."'>Borrar</a></td></tr>";
+            echo "<tr><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td>";
+            if ($c['fecha'] >= date('Y-m-d')){
+                echo "<td><a href='".BASE_URL."Citas/deleteAdm&id=".$c['id']."'>Borrar</a></td>";
+            }else{
+                echo"<td>No se puede modificar citas pasadas</td>";
             }
+        echo "</tr>";
         }
         echo '</table>';
     }
@@ -32,6 +36,8 @@ class CitasView{
             echo "<tr><td>".$c['Pnombre'].' '.$c['Papellidos']."</td><td>".$c['fecha']."</td><td>".$c['hora']."</td><td>".$c['nombre'].' '.$c['apellidos']."</td><td>".$c['especialidad']."</td>";
             if ($c['fecha'] >= date('Y-m-d')){
                 echo "<td><a href='".BASE_URL."Citas/deleteAdm&id=".$c['id']."'>Borrar</a></td>";
+            }else{
+                echo"<td>No se puede modificar citas pasadas</td>";
             }
             echo "</tr>";
         }
