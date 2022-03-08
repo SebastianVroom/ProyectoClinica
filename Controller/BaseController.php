@@ -10,6 +10,7 @@ class BaseController{
     protected function chckRol($rol){
         if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] != $rol){
             header('Location:'.BASE_URL);
+            exit();
         }
     }
 }

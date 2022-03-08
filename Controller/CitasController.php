@@ -12,7 +12,7 @@ class CitasController extends BaseController{
     
     function mostrarCitas(){
         $this->chckRol('paciente');
-        $citas = $this->model->consulCitas($_SESSION['userdata']['id']);
+        $citas = $this->model->consulCitasPaciente($_SESSION['userdata']['id']);
         $this->view->mostrCitas($citas);
     }
 
@@ -94,6 +94,59 @@ class CitasController extends BaseController{
         }
         $data = $this->model->Consuldet();
         $this->view->modAdmForm($resul,$data);
+    }
+    
+    function updateAdm(){
+        $this->chckRol('administrador');
+        $data=[];
+        if(isset($_POST['fecha']) && !empty($_POST['fecha'])){
+            $data[':fecha'] = filter_var($_POST['fecha'],FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        if(isset($_POST['tiempo']) && !empty($_POST['tiempo'])){
+            $data[':tiempo'] = filter_var($_POST['tiempo'],FILTER_SANITIZE_SPECIAL_CHARS);
+        }if(isset($_POST['paciente']) && !empty($_POST['paciente'] && filter_var($_POST['paciente'],FILTER_VALIDATE_INT))){
+            $data[':paciente'] = filter_var($_POST['paciente'],FILTER_SANITIZE_NUMBER_INT);
+        }if(isset($_POST['doctor']) && !empty($_POST['doctor'] && filter_var($_POST['doctor'],FILTER_VALIDATE_INT))){
+            $data[':doctor'] = filter_var($_POST['doctor'],FILTER_SANITIZE_NUMBER_INT);
+        }
+        $id = filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
+        if(count($data) < 4){
+            $this->view->displayError('Modificando Cita');
+        }else{
+            $this->model->updateAdmCita($data,$id);
+            $this->mostrarAdmCitas();
+        }
+    }
+
+    function modCita(){
+        $this->chckRol('paciente');
+        $consul = $this->model->consulCitas($_GET['id']);
+        foreach($consul as $c){
+            $resul = $c;
+        }
+        $data = $this->model->Consuldet();
+        $this->view->modForm($resul,$data);
+    }
+    
+    
+    function update(){
+        $this->chckRol('paciente');
+        $data=[];
+        if(isset($_POST['fecha']) && !empty($_POST['fecha'])){
+            $data[':fecha'] = filter_var($_POST['fecha'],FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        if(isset($_POST['tiempo']) && !empty($_POST['tiempo'])){
+            $data[':tiempo'] = filter_var($_POST['tiempo'],FILTER_SANITIZE_SPECIAL_CHARS);
+        }if(isset($_POST['doctor']) && !empty($_POST['doctor'] && filter_var($_POST['doctor'],FILTER_VALIDATE_INT))){
+            $data[':doctor'] = filter_var($_POST['doctor'],FILTER_SANITIZE_NUMBER_INT);
+        }
+        $id = filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
+        if(count($data) < 3){
+            $this->view->displayError('Modificando Cita');
+        }else{
+            $this->model->updateCita($data,$id);
+            $this->mostrarCitas();
+        }
     }
 }
 ?>
